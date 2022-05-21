@@ -91,7 +91,5 @@ public class WordFileReader {
 			e.printStackTrace();
 		}
 	}
-
-
-
+	
 }

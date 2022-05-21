@@ -130,6 +130,8 @@ public class Game {
 		this.lives = startLives;
 		this.word = null;
 		this.lettersGuessed.clear();
+		this.inCorrectlettersGuessed.clear();
+
 	}
 
 	public boolean isAlive() {

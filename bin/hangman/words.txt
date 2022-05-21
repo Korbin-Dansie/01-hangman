@@ -1,6 +1,5 @@
-school
-teacher
-computer
-language
 lexicon
-supercalifragilisticexpialidocious
+teacher
+school
+cobalt
+paradox

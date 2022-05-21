@@ -6,7 +6,15 @@ import java.util.Set;
 public class UserInput{
 
 	private String input;
-    private Scanner in = new Scanner(System.in);  // Create a Scanner object
+    private Scanner in; // Create a Scanner object
+    
+    /**
+     * Need to pass a scanner in because only one can exist at a time
+     * @param scanner
+     */
+    public UserInput(Scanner scanner) {
+    	this.in = scanner;
+    }
 
     /**
      * TODO: Update with the "Class Cleaner"
