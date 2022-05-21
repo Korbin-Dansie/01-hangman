@@ -3,6 +3,8 @@ package hangman;
 import java.text.CharacterIterator;
 import java.text.StringCharacterIterator;
 import java.util.HashSet;
+import java.util.Iterator;
+import java.util.LinkedHashSet;
 import java.util.Set;
 
 public class Game {
@@ -14,8 +16,23 @@ public class Game {
 	private Set<String> lettersGuessed = new HashSet<String>();
 	
 	//Subset of lettersGuessed
-	private Set<String> inCorrectlettersGuessed = new HashSet<String>();
+	private Set<String> inCorrectlettersGuessed = new LinkedHashSet<String>();
 
+	public String displayLettersGuseed() {
+		String displayString = "";
+		
+        Iterator<String> it = inCorrectlettersGuessed.iterator();
+        while (it.hasNext()) {
+            // Print HashSet values
+        	displayString += it.next();
+        	if(it.hasNext()) {
+        		displayString += ", ";
+        	}
+        }
+
+        return displayString;
+	}
+	
 	/**
 	 * Check if they have guessed all the letter in the word
 	 * @return

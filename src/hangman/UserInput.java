@@ -1,6 +1,7 @@
 package hangman;
 
 import java.util.Scanner;
+import java.util.Set;
 
 public class UserInput{
 
@@ -25,22 +26,18 @@ public class UserInput{
 	/**
 	 * Prompt the user for a character Update input variable
 	 */
-	public void requestInput() {
+	public void requestInput(Game game) {
 		String n = null;
 		// Store if input is valid
 		boolean isValidInput = false;
 
 		do {
-			System.out.println("Enter a letter: ");
+			System.out.print("Enter a letter: ");
 			
-				n = in.nextLine();
-				isValidInput = validateInput(n);
+				n = in.nextLine().toLowerCase();
+				isValidInput = validateInput(n, game.getLettersGuessed());
 
-				if (!isValidInput) {
-					System.out.println("Invalid input. Please try again.");
-				}				
-				// once finished
-				else {
+				if (isValidInput) {
 					// Update input
 					this.input = n;
 				}
@@ -52,15 +49,19 @@ public class UserInput{
 	 * 
 	 * @return 0 = not valid, 1 = valid
 	 */
-	private boolean validateInput(String in) {
+	private boolean validateInput(String in, Set<String> lettersGuessed) {
 		// If more than 1 char ask again
 		// If not a letter from A-Z
-		if (in == null) {
-			return false;
-		}
-		if (in.matches("[A-Za-z]{1}")) {
+		if (in.matches("[A-Za-z]{1}") && !lettersGuessed.contains(in)) {
 			return true;
 		}
+		
+		// Reasons it could be wrong
+		System.out.println("Invalid input. Please try again.");
+		if(lettersGuessed.contains(in)) {
+			System.out.println("Already guessed that letter.");
+		}
+		
 		return false;
 	}
 

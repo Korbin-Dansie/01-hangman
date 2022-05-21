@@ -27,31 +27,27 @@ public class Hangman {
 			// Check if alive
 			while(game.isAlive()) {
 				// Display info
-				System.out.println("\n\n\n\n\n\n");
-
-				
 				System.out.println("Lives: " + game.getLives());
 				if(!game.getInCorrectlettersGuessed().isEmpty()) {
-					System.out.println("Guesses" + game.getInCorrectlettersGuessed());
+					System.out.println("Guesses: " + game.displayLettersGuseed());
 				}
 				System.out.println(game.getReviledWord());
 				
 				// Get letter
-				// make them guess again if they already guessed the letter
-				do {
-				userInput.requestInput();
-				if(game.getLettersGuessed().contains(userInput.getInput())) {
-					System.out.println("Already guessed that letter.");
-				}
-				} while(game.getLettersGuessed().contains(userInput.getInput()));
+				userInput.requestInput(game);
 				
 				// Update guessed letter
 				game.addLetterToGuessedLetter(userInput.getInput());
 				
+				//Clear the console
+				System.out.println("=============================="); 
+
 				//Check if they won
 				if(game.hasWon()) {
 					break;
 				}
+				
+				
 			}
 			
 			
