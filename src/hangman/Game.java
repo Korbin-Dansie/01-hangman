@@ -12,6 +12,38 @@ public class Game {
 	// The random word. Hidden from users
 	private String word;
 	private Set<String> lettersGuessed = new HashSet<String>();
+	
+	//Subset of lettersGuessed
+	private Set<String> inCorrectlettersGuessed = new HashSet<String>();
+
+	/**
+	 * Check if they have guessed all the letter in the word
+	 * @return
+	 */
+	public boolean hasWon() {
+		CharacterIterator it = new StringCharacterIterator(this.word);
+		while (it.current() != CharacterIterator.DONE) {
+			if (this.lettersGuessed.contains(String.valueOf(it.current()))) {
+				it.next();
+				continue;
+			}
+			// If the set does not contains a letter in the word the user has not guessed it yet
+			else {
+				return false;
+			}
+		}
+		
+		return true;
+	}
+	
+	
+	public Set<String> getInCorrectlettersGuessed() {
+		return inCorrectlettersGuessed;
+	}
+
+	public void setInCorrectlettersGuessed(Set<String> inCorrectlettersGuessed) {
+		this.inCorrectlettersGuessed = inCorrectlettersGuessed;
+	}
 
 	/**
 	 * Return the hidden word formated with correct guesses reviled.
@@ -45,9 +77,24 @@ public class Game {
 		return hidden;
 	}
 
+	/**
+	 * Checks user input to see what they guessed
+	 * If already guessed let them know
+	 * If not in word loose a life
+	 * @param input
+	 */
 	public void addLetterToGuessedLetter(String input) {
+		
 		this.lettersGuessed.add(input);
+		if(!word.contains(input)) {
+			this.inCorrectlettersGuessed.add(input);
+			this.loseLife();
+		}
 
+	}
+	
+	public void displayIncorrectGuesses() {
+		System.out.print(this.inCorrectlettersGuessed);
 	}
 
 	public Set<String> getLettersGuessed() {
